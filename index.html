@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>DropSpace | HCI Experiment 11</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <div class="app">
+
+        <!-- Navigation -->
+        <header class="navbar">
+            <div class="brand">
+                <div class="brand-icon">↥</div>
+                <span>DropSpace</span>
+            </div>
+
+            <span class="lab-badge">HCI LAB · EXPERIMENT 11</span>
+        </header>
+
+        <!-- Introduction -->
+        <section class="hero">
+
+            <div class="eyebrow">
+                <span class="status-dot"></span>
+                SIMPLE. FAST. INTUITIVE.
+            </div>
+
+            <h1>
+                Files, meet their<br>
+                <span>new home.</span>
+            </h1>
+
+            <p>
+                Drag your files into the space below,
+                or browse your computer to select them.
+            </p>
+
+        </section>
+
+        <!-- Upload Card -->
+        <main class="upload-card">
+
+            <div class="card-heading">
+
+                <div>
+                    <h2>Upload your files</h2>
+                    <p>Select one or more files to get started.</p>
+                </div>
+
+                <span class="local-badge">
+                    ✓ Local preview
+                </span>
+
+            </div>
+
+            <!-- Drag and Drop Zone -->
+            <div
+                id="dropZone"
+                class="drop-zone"
+                role="button"
+                tabindex="0"
+                aria-label="Drop files here or press Enter to browse"
+            >
+
+                <div class="upload-icon">
+                    <svg viewBox="0 0 48 48" aria-hidden="true">
+                        <path d="M24 31V7"></path>
+                        <path d="M14 17L24 7L34 17"></path>
+                        <path d="M9 29V39H39V29"></path>
+                    </svg>
+                </div>
+
+                <h3 id="dropTitle">Drop your files here</h3>
+
+                <p>
+                    or
+                    <button
+                        id="browseButton"
+                        class="text-button"
+                        type="button"
+                    >
+                        browse files
+                    </button>
+                    from your computer
+                </p>
+
+                <div class="file-rules">
+                    <span>PDF</span>
+                    <span>PNG</span>
+                    <span>JPG</span>
+                    <span>TXT</span>
+                    <span>DOCX</span>
+                </div>
+
+                <small>Maximum file size: 10 MB per file</small>
+
+                <input
+                    id="fileInput"
+                    type="file"
+                    multiple
+                    accept=".pdf,.png,.jpg,.jpeg,.txt,.doc,.docx"
+                    hidden
+                >
+
+            </div>
+
+            <!-- Selected Files -->
+            <div class="list-heading">
+
+                <h3>
+                    Selected files
+                    <span id="fileCount" class="count">0</span>
+                </h3>
+
+                <button
+                    id="clearButton"
+                    class="clear-button"
+                    type="button"
+                    disabled
+                >
+                    Clear all
+                </button>
+
+            </div>
+
+            <div id="fileList" class="file-list">
+
+                <div id="emptyState" class="empty-state">
+                    <span class="empty-icon">▤</span>
+                    <p>Your selected files will appear here.</p>
+                </div>
+
+            </div>
+
+            <!-- Status Messages -->
+            <div
+                id="statusMessage"
+                class="status-message"
+                role="status"
+                aria-live="polite"
+            >
+                Ready when you are. Add a file to begin.
+            </div>
+
+            <!-- Footer Actions -->
+            <div class="card-footer">
+
+                <p>▣ Files are previewed locally in your browser.</p>
+
+                <button
+                    id="uploadButton"
+                    class="upload-button"
+                    type="button"
+                    disabled
+                >
+                    ↥ Simulate upload
+                </button>
+
+            </div>
+
+            <!-- Progress -->
+            <div id="progressSection" class="progress-section" hidden>
+
+                <div class="progress-label">
+                    <span id="progressText">Uploading...</span>
+                    <strong id="progressPercent">0%</strong>
+                </div>
+
+                <div class="progress-track">
+                    <div id="progressBar" class="progress-bar"></div>
+                </div>
+
+            </div>
+
+        </main>
+
+        <!-- Footer -->
+        <footer>
+            <span>Designed for usability</span>
+            <span>Human–Computer Interaction · Experiment 11</span>
+        </footer>
+
+    </div>
+
+    <script src="script.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,642 @@
+/* ===================================
+   HCI EXPERIMENT 11 - DROP SPACE
+   =================================== */
+
+:root {
+    --primary: #3978f6;
+    --primary-dark: #245fe0;
+    --text: #192b3a;
+    --muted: #72808c;
+    --border: #e4eaf0;
+    --background: #f7f9fc;
+    --success: #16845b;
+    --error: #c53b48;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    font-family: "Segoe UI", Arial, sans-serif;
+    color: var(--text);
+
+    background:
+        radial-gradient(
+            circle at 15% 5%,
+            #eaf1ff 0,
+            transparent 30%
+        ),
+        var(--background);
+}
+
+button {
+    font: inherit;
+}
+
+button:focus-visible,
+.drop-zone:focus-visible {
+    outline: 3px solid #91b4ff;
+    outline-offset: 4px;
+}
+
+.app {
+    width: min(900px, calc(100% - 36px));
+    margin: auto;
+}
+
+/* Navigation */
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px;
+    padding: 27px 0 12px;
+}
+
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 21px;
+    font-weight: 800;
+    letter-spacing: -0.5px;
+}
+
+.brand-icon {
+    display: grid;
+    place-items: center;
+    width: 36px;
+    height: 36px;
+    border-radius: 11px;
+    background: var(--primary);
+    color: white;
+    font-size: 25px;
+    box-shadow: 0 7px 16px #3978f633;
+}
+
+.lab-badge {
+    padding: 9px 12px;
+    border-radius: 30px;
+    background: #eaf0f8;
+    color: #62758a;
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 1px;
+}
+
+/* Hero Section */
+
+.hero {
+    padding: 48px 0 30px;
+    text-align: center;
+}
+
+.eyebrow {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 9px;
+    color: var(--primary);
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 2px;
+}
+
+.status-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: #43bd91;
+}
+
+.hero h1 {
+    margin: 17px 0;
+    font-size: clamp(38px, 6vw, 59px);
+    line-height: 1.05;
+    letter-spacing: -2px;
+}
+
+.hero h1 span {
+    color: var(--primary);
+}
+
+.hero p {
+    max-width: 500px;
+    margin: auto;
+    color: var(--muted);
+    line-height: 1.7;
+    font-size: 14px;
+}
+
+/* Main Card */
+
+.upload-card {
+    padding: 27px;
+    border: 1px solid #e9edf3;
+    border-radius: 22px;
+    background: white;
+    box-shadow: 0 20px 55px #233c5b0b;
+}
+
+.card-heading,
+.list-heading,
+.card-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px;
+}
+
+.card-heading h2 {
+    margin: 0 0 6px;
+    font-size: 19px;
+}
+
+.card-heading p {
+    margin: 0;
+    color: var(--muted);
+    font-size: 12px;
+}
+
+.local-badge {
+    padding: 8px 11px;
+    border-radius: 30px;
+    background: #edf9f3;
+    color: #477461;
+    font-size: 11px;
+    white-space: nowrap;
+}
+
+/* Drop Zone */
+
+.drop-zone {
+    min-height: 230px;
+    margin-top: 24px;
+    padding: 25px 15px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    border: 2px dashed #cbd7e8;
+    border-radius: 16px;
+    background: #fbfcff;
+
+    cursor: pointer;
+    text-align: center;
+
+    transition:
+        background 0.2s ease,
+        border-color 0.2s ease,
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.drop-zone:hover {
+    border-color: var(--primary);
+    background: #f7f9ff;
+}
+
+/* IMPORTANT HCI FEATURE:
+   Visual feedback during drag-and-drop */
+
+.drop-zone.drag-over {
+    border: 2px dashed var(--primary);
+    background: #eaf1ff;
+
+    transform: scale(1.01);
+
+    box-shadow:
+        inset 0 0 0 4px #3978f610,
+        0 8px 24px #3978f615;
+}
+
+.drop-zone.drag-over .upload-icon {
+    background: var(--primary);
+    color: white;
+    transform: translateY(-4px);
+}
+
+.drop-zone.drag-over h3 {
+    color: var(--primary-dark);
+}
+
+/* Upload Icon */
+
+.upload-icon {
+    display: grid;
+    place-items: center;
+
+    width: 55px;
+    height: 55px;
+
+    border-radius: 17px;
+    background: #eaf1ff;
+    color: var(--primary);
+
+    transition: 0.2s;
+}
+
+.upload-icon svg {
+    width: 30px;
+    height: 30px;
+
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 2.3;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+.drop-zone h3 {
+    margin: 15px 0 6px;
+    font-size: 17px;
+}
+
+.drop-zone p {
+    margin: 0;
+    color: var(--muted);
+    font-size: 13px;
+}
+
+.text-button {
+    padding: 0;
+    border: 0;
+    background: transparent;
+    color: var(--primary);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.file-rules {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 6px;
+    margin: 17px 0 9px;
+}
+
+.file-rules span {
+    padding: 5px 8px;
+    border-radius: 5px;
+    background: #f0f3f7;
+    color: #6b7b8c;
+    font-size: 9px;
+    font-weight: 800;
+}
+
+.drop-zone small {
+    color: #8a97a5;
+    font-size: 10px;
+}
+
+/* File List Heading */
+
+.list-heading {
+    margin: 25px 0 12px;
+}
+
+.list-heading h3 {
+    margin: 0;
+    font-size: 13px;
+}
+
+.count {
+    display: inline-grid;
+    place-items: center;
+    min-width: 22px;
+    height: 22px;
+    margin-left: 5px;
+    padding: 0 5px;
+
+    border-radius: 7px;
+    background: #edf2fa;
+    color: #53657b;
+    font-size: 11px;
+}
+
+.clear-button {
+    padding: 7px;
+    border: 0;
+    background: transparent;
+    color: var(--muted);
+    font-size: 12px;
+    cursor: pointer;
+}
+
+.clear-button:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+}
+
+/* Empty State */
+
+.empty-state {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+
+    padding: 19px 10px;
+
+    border: 1px solid #edf0f4;
+    border-radius: 12px;
+
+    color: #9aa5b1;
+    font-size: 12px;
+}
+
+.empty-state p {
+    margin: 0;
+}
+
+.empty-icon {
+    font-size: 22px;
+}
+
+.empty-state[hidden] {
+    display: none;
+}
+
+/* Selected File */
+
+.file-list {
+    display: grid;
+    gap: 9px;
+}
+
+.file-item {
+    display: grid;
+    grid-template-columns: 42px minmax(0, 1fr) auto;
+    align-items: center;
+    gap: 12px;
+
+    min-width: 0;
+    padding: 12px;
+
+    border: 1px solid #e9edf3;
+    border-radius: 12px;
+}
+
+.file-icon {
+    display: grid;
+    place-items: center;
+
+    width: 42px;
+    height: 42px;
+
+    overflow: hidden;
+    border-radius: 10px;
+
+    background: #edf3ff;
+    color: var(--primary);
+
+    font-size: 10px;
+    font-weight: 900;
+    text-transform: uppercase;
+}
+
+.file-icon img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.file-info {
+    min-width: 0;
+}
+
+.file-name {
+    overflow: hidden;
+    margin-bottom: 5px;
+
+    font-size: 12px;
+    font-weight: 750;
+
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.file-meta {
+    color: var(--muted);
+    font-size: 10px;
+    overflow-wrap: anywhere;
+}
+
+.file-status {
+    margin-top: 5px;
+    color: var(--success);
+    font-size: 10px;
+    font-weight: 750;
+}
+
+.remove-button {
+    width: 30px;
+    height: 30px;
+
+    border: 0;
+    border-radius: 8px;
+
+    background: #f4f6f9;
+    color: #768494;
+
+    font-size: 19px;
+    cursor: pointer;
+}
+
+.remove-button:hover:not(:disabled) {
+    background: #ffeded;
+    color: var(--error);
+}
+
+.remove-button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+/* Status Messages */
+
+.status-message {
+    min-height: 40px;
+    display: flex;
+    align-items: center;
+
+    margin-top: 15px;
+    padding: 11px 12px;
+
+    border-radius: 9px;
+    background: #f6f8fb;
+    color: #68788b;
+
+    font-size: 11px;
+    line-height: 1.5;
+}
+
+.status-message.success {
+    background: #ecf9f2;
+    color: var(--success);
+}
+
+.status-message.error {
+    background: #fff0f0;
+    color: var(--error);
+}
+
+/* Footer Actions */
+
+.card-footer {
+    margin-top: 17px;
+    padding-top: 18px;
+    border-top: 1px solid #edf0f4;
+}
+
+.card-footer p {
+    margin: 0;
+    color: #84909c;
+    font-size: 10px;
+    line-height: 1.5;
+}
+
+.upload-button {
+    padding: 12px 17px;
+    border: 0;
+    border-radius: 10px;
+
+    background: var(--primary);
+    color: white;
+
+    font-size: 12px;
+    font-weight: 750;
+
+    cursor: pointer;
+
+    box-shadow: 0 6px 14px #3978f629;
+    transition: 0.15s;
+}
+
+.upload-button:hover:not(:disabled) {
+    background: var(--primary-dark);
+    transform: translateY(-1px);
+}
+
+.upload-button:disabled {
+    background: #b8c7df;
+    box-shadow: none;
+    cursor: not-allowed;
+}
+
+/* Simulated Progress */
+
+.progress-section {
+    margin-top: 18px;
+}
+
+.progress-section[hidden] {
+    display: none;
+}
+
+.progress-label {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+
+    margin-bottom: 9px;
+    color: #68788b;
+    font-size: 11px;
+}
+
+.progress-track {
+    height: 7px;
+    overflow: hidden;
+
+    border-radius: 20px;
+    background: #e9eef6;
+}
+
+.progress-bar {
+    width: 0;
+    height: 100%;
+
+    border-radius: 20px;
+    background: var(--primary);
+
+    transition: width 0.15s ease;
+}
+
+/* Page Footer */
+
+footer {
+    display: flex;
+    justify-content: space-between;
+    gap: 15px;
+
+    padding: 22px 4px 28px;
+
+    color: #9aa5b1;
+    font-size: 10px;
+}
+
+/* Responsive Design */
+
+@media (max-width: 600px) {
+    .navbar {
+        padding-top: 18px;
+    }
+
+    .brand {
+        font-size: 18px;
+    }
+
+    .lab-badge {
+        font-size: 8px;
+        letter-spacing: 0.4px;
+        padding: 8px;
+    }
+
+    .hero {
+        padding: 37px 0 25px;
+    }
+
+    .hero h1 {
+        letter-spacing: -1.5px;
+    }
+
+    .upload-card {
+        padding: 18px;
+        border-radius: 17px;
+    }
+
+    .card-heading {
+        align-items: flex-start;
+    }
+
+    .local-badge {
+        font-size: 9px;
+        padding: 7px;
+    }
+
+    .drop-zone {
+        min-height: 215px;
+    }
+
+    .card-footer {
+        align-items: stretch;
+        flex-direction: column;
+    }
+
+    .upload-button {
+        width: 100%;
+    }
+
+    footer {
+        flex-direction: column;
+        text-align: center;
+    }
+}
